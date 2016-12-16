@@ -5,9 +5,9 @@ int main(void)
 {
     try {
         Environment::Initialize();
-        Connection con("hermes", "hermes", "hermes");
+        Connection con("xxx", "xxx", "xxx");
         Statement st(con);
-        st.Prepare("select EMAIL_ACCOUNT_ID,EMAIL_ACCOUNT_NAME,cast((last_processtime - TO_DATE('1970-1-1 8', 'YYYY-MM-DD HH24')) * 86400 as number) as tm from hmm_corp_sms_notify where email_account_id=:EMAIL_ACCOUNT_ID");
+        st.Prepare("select EMAIL_ACCOUNT_ID,EMAIL_ACCOUNT_NAME,cast((last_processtime - TO_DATE('1970-1-1 8', 'YYYY-MM-DD HH24')) * 86400 as number) as tm from xxx where email_account_id=:EMAIL_ACCOUNT_ID");
         int email_account_id = 19810560;
         ostring os_eai = OTEXT("19810560");
         st.Bind(":EMAIL_ACCOUNT_ID",os_eai,static_cast<unsigned int>(os_eai.size()),BindInfo::In);
@@ -24,7 +24,7 @@ int main(void)
         std::cout << "=> Total fetched rows : " << rs.GetCount() << std::endl;
 
 
-        st.Prepare("begin \nhmm_corp_sms_deduct(:DOMAIN_ID,:ACC_NAME,:NUM,:RESULT);\nend;");
+        st.Prepare("begin \nprocedure(:DOMAIN_ID,:ACC_NAME,:NUM,:RESULT);\nend;");
         ostring os_domain_id,os_acc_name;
         int num,result;
 
